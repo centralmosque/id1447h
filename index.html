@@ -758,7 +758,7 @@ footer {
 
 <script>
 // Configuration
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyOJLW8UoNVe0K2WsnBjzlcQTOTD8AdFkDIILWlyVJjU6al1yhQOr-3s7HkUAwrZ8inCg/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby1vY7BbJWQR9V0RBM2-_oUnhe2oRDmXFzIeqb5S5WYskEsWu_Qc40pETmRUSvsoONkyQ/exec";
 
 // Detect language
 const userLang = navigator.language || navigator.userLanguage;
@@ -956,7 +956,7 @@ function resetOTPVerification() {
   }
 }
 
-// Send OTP function
+// Send OTP function (modified)
 async function sendOTP() {
   const nama = namaLengkapInput.value.trim();
   const email = emailInput.value.trim();
@@ -966,19 +966,18 @@ async function sendOTP() {
     return;
   }
   
-  // Disable button and show loading
   const originalText = sendOtpBtn.innerHTML;
   sendOtpBtn.disabled = true;
   sendOtpBtn.innerHTML = `<span class="loading-spinner"></span> <span>${messages.sendingOtp[lang]}</span>`;
   
   try {
+    // SINKRONISASI: Menggunakan parameter 'nama' sesuai perbaikan di GAS
     const response = await fetch(
       `${SCRIPT_URL}?action=send_otp&email=${encodeURIComponent(email)}&nama=${encodeURIComponent(nama)}&lang=${lang}`
     );
     const result = await response.json();
     
     if (result.status === 'success') {
-      // Tampilkan field OTP, reset verifikasi
       otpField.classList.add('active');
       otpInput.focus();
       isOTPVerified = false;
@@ -988,19 +987,9 @@ async function sendOTP() {
       otpHint.textContent = messages.otpSent[lang];
       otpHint.style.color = '#10a37f';
       
-      // Set email menjadi readonly dan tampilkan tombol edit
       emailInput.readOnly = true;
       editEmailBtn.style.display = 'inline-flex';
-      
-      // Mulai cooldown
       startCooldown(60);
-      
-      setTimeout(() => {
-        if (!isOTPVerified) {
-          otpHint.textContent = otpHint.getAttribute(`data-${lang}`) || otpHint.getAttribute('data-id');
-          otpHint.style.color = '';
-        }
-      }, 3000);
     } else {
       alert(result.message || messages.networkError[lang]);
       sendOtpBtn.disabled = false;
@@ -1012,22 +1001,23 @@ async function sendOTP() {
     sendOtpBtn.disabled = false;
     sendOtpBtn.innerHTML = originalText;
   }
-  initMultilingual();
 }
 
-// Verify OTP dengan memanggil server
+// Verify OTP function (modified)
 async function verifyOTP() {
   const enteredOTP = otpInput.value.trim();
   const email = emailInput.value.trim();
   
   if (enteredOTP.length === 6) {
     try {
+      // SINKRONISASI: Menggunakan parameter 'otp' sesuai perbaikan di GAS
       const response = await fetch(
         `${SCRIPT_URL}?action=verify_otp&email=${encodeURIComponent(email)}&otp=${enteredOTP}`
       );
       const result = await response.json();
       
-      if (result.verified) {
+      // SINKRONISASI: Memeriksa properti 'result.verified'
+      if (result.verified === true) {
         isOTPVerified = true;
         otpInput.disabled = true;
         otpInput.style.backgroundColor = '#f0fdf4';
@@ -1036,17 +1026,12 @@ async function verifyOTP() {
         otpHint.style.color = '#10a37f';
       } else {
         isOTPVerified = false;
-        otpHint.innerHTML = `<i class="fas fa-exclamation-circle" style="margin-right: 5px; color: #dc2626;"></i> ${messages.invalidOtp[lang]}`;
+        otpHint.innerHTML = `<i class="fas fa-exclamation-circle" style="margin-right: 5px; color: #dc2626;"></i> ${result.message || messages.invalidOtp[lang]}`;
         otpHint.style.color = '#dc2626';
       }
     } catch (error) {
       console.error('Error verifying OTP:', error);
-      alert(messages.networkError[lang]);
     }
-  } else {
-    isOTPVerified = false;
-    otpHint.textContent = otpHint.getAttribute(`data-${lang}`) || otpHint.getAttribute('data-id');
-    otpHint.style.color = '';
   }
 }
 
