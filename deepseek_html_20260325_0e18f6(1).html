@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=yes">
+<title>Pendaftaran Idul Fitri - Okayama Central Mosque</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+  padding-bottom: 90px;
+}
+
+main {
+  padding: 24px 16px 40px;
+}
+
+.container {
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+/* header with language switcher - improved layout */
+.header {
+  text-align: center;
+  margin-bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #064e3b;
+  margin: 0 0 4px;
+}
+.header div {
+  font-size: 14px;
+  color: #475569;
+}
+.lang-switcher {
+  display: flex;
+  gap: 6px;
+  background: white;
+  padding: 4px 8px;
+  border-radius: 40px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
+  margin-bottom: 12px; /* avoid overlap with title */
+}
+.lang-btn {
+  background: none;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: #475569;
+}
+.lang-btn.active {
+  background: #10b981;
+  color: white;
+}
+.lang-btn:hover:not(.active) {
+  background: #e2e8f0;
+}
+
+/* card */
+.card {
+  background: #fff;
+  border-radius: 28px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03), 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 24px 20px 20px;
+  border: 1px solid #e9eef3;
+  transition: all 0.2s;
+}
+
+/* form sections */
+.form-section {
+  margin-bottom: 28px;
+  border-bottom: 1px solid #ecf3f9;
+  padding-bottom: 18px;
+}
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f3b2c;
+  margin-bottom: 18px;
+}
+.section-title i {
+  font-size: 18px;
+  color: #10b981;
+}
+
+.field {
+  margin-bottom: 20px;
+}
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #475569;
+  margin-bottom: 6px;
+}
+.input-wrapper {
+  position: relative;
+}
+.input-wrapper i:first-child {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 14px;
+  pointer-events: none;
+}
+input, select {
+  width: 100%;
+  padding: 13px 14px 13px 42px;
+  border-radius: 16px;
+  border: 1.5px solid #e2e8f0;
+  font-size: 15px;
+  background: #ffffff;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
+}
+select {
+  padding: 13px 14px 13px 42px;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%2364748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+  background: #fff;
+}
+input:disabled {
+  background-color: #f8fafc;
+  color: #64748b;
+  cursor: not-allowed;
+  border-color: #e2edf2;
+}
+
+/* inline error & hint */
+.error-message {
+  font-size: 12px;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #dc2626;
+  font-weight: 500;
+}
+.hint {
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+/* gender group */
+.gender-group {
+  display: flex;
+  gap: 12px;
+}
+.gender-group input {
+  display: none;
+}
+.gender-group label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 18px;
+  border: 1.5px solid #e2e8f0;
+  background: #f9fbfd;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.gender-group input:checked + label {
+  background: #ecfdf5;
+  border-color: #10b981;
+  color: #065f46;
+}
+
+/* OTP modern 4-boxes */
+.otp-boxes {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 8px;
+}
+.otp-digit {
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+  padding: 0;
+  border-radius: 18px;
+  border: 1.5px solid #cbd5e1;
+  background: #fff;
+  transition: 0.2s;
+}
+.otp-digit:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16,185,129,0.2);
+}
+.otp-verified-highlight .otp-digit {
+  background: #e6f7ec;
+  border-color: #10b981;
+  color: #065f46;
+}
+
+/* email lock row with static OTP button - anti-jump fix */
+.email-lock-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.email-lock-row .input-wrapper {
+  flex: 1;
+}
+.change-email-btn, .send-otp-btn {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 40px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1e293b;
+  cursor: pointer;
+  transition: 0.2s;
+  height: 48px;
+  white-space: nowrap;
+  /* ANTI-JUMP: consistent width & alignment */
+  min-width: 105px;
+  justify-content: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+.change-email-btn:hover, .send-otp-btn:hover {
+  background: #e2e8f0;
+}
+.send-otp-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* breakdown row */
+.breakdown-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.breakdown-row .field {
+  flex: 1;
+}
+
+/* transport warning */
+.parking-warning {
+  background: #fffbeb;
+  border-left: 4px solid #f59e0b;
+  padding: 12px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+}
+.parking-warning i {
+  color: #f59e0b;
+}
+
+/* consent */
+.consent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8fef9;
+  padding: 12px 14px;
+  border-radius: 18px;
+  border: 1px solid #d1fae5;
+}
+.consent input {
+  width: 20px;
+  height: 20px;
+  accent-color: #10b981;
+  margin: 0;
+}
+.consent span {
+  flex: 1;
+  font-size: 13px;
+}
+
+/* sticky button */
+.sticky-submit {
+  position: sticky;
+  bottom: 16px;
+  z-index: 20;
+  margin-top: 28px;
+  background: transparent;
+  padding-top: 10px;
+}
+.sticky-submit button {
+  width: 100%;
+  background: #059669;
+  border: none;
+  padding: 16px;
+  border-radius: 60px;
+  font-weight: 700;
+  font-size: 16px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 8px 20px rgba(5, 150, 105, 0.25);
+}
+.sticky-submit button:active {
+  transform: scale(0.97);
+}
+.sticky-submit button:disabled {
+  background: #cbd5e1;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* toast notification */
+.toast-notify {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #1f2937;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 60px;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 200;
+  opacity: 0;
+  transition: 0.2s ease;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.85);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+.toast-notify.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.toast-notify i {
+  font-size: 18px;
+}
+
+/* loading overlay */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 150;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.2s;
+}
+.loading-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+.loader-icon {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #cbd5e1;
+  border-top-color: #059669;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* warning alert */
+.warning-badge {
+  background: #fffbeb;
+  border-left: 4px solid #f59e0b;
+  padding: 12px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.duplicate-warning {
+  background: #fef2f2;
+  border-left-color: #dc2626;
+  color: #991b1b;
+}
+.shake {
+  animation: shake 0.3s ease-in-out 0s 2;
+}
+@keyframes shake {
+  0%,100%{ transform: translateX(0); }
+  25%{ transform: translateX(-4px); }
+  75%{ transform: translateX(4px); }
+}
+
+/* total summary card */
+.total-summary {
+  background: #f0f9f4;
+  border-radius: 24px;
+  padding: 16px;
+  text-align: center;
+  margin: 16px 0 0;
+}
+.total-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f3b2c;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.total-number {
+  font-size: 36px;
+  font-weight: 700;
+  color: #064e3b;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.total-detail {
+  font-size: 12px;
+  color: #2d6a4f;
+  font-weight: 500;
+}
+
+/* misc */
+footer {
+  text-align: center;
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 32px;
+}
+@media (max-width: 560px) {
+  .breakdown-row { flex-direction: column; gap: 12px; }
+  .otp-digit { width: 55px; height: 55px; font-size: 24px; }
+  .card { padding: 20px; }
+  .change-email-btn, .send-otp-btn { min-width: 88px; padding: 0 8px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div id="loadingOverlay" class="loading-overlay"><div class="loader-icon"></div></div>
+<div id="toastRoot" class="toast-notify"><i class="fas fa-circle-info"></i><span id="toastMsg"></span></div>
+
+<main>
+<div class="container">
+  <div class="header">
+    <div class="lang-switcher">
+      <button class="lang-btn" data-lang="id">🇮🇩 ID</button>
+      <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+      <button class="lang-btn" data-lang="ja">🇯🇵 JP</button>
+    </div>
+    <h1 data-id="Pendaftaran Sholat Idul Fitri" data-en="Eid Prayer Registration" data-ja="参加登録"></h1>
+    <div>Okayama Central Mosque</div>
+  </div>
+
+  <div class="card">
+    <form id="registrationForm">
+      <!-- section data diri -->
+      <div class="form-section">
+        <div class="section-title"><i class="fas fa-user-circle"></i><span data-id="Data Diri" data-en="Personal Data" data-ja="個人情報">Data Diri</span></div>
+        <div class="field">
+          <label data-id="Nama Lengkap" data-en="Full Name" data-ja="氏名"></label>
+          <div class="input-wrapper"><i class="fas fa-user"></i><input type="text" name="nama_lengkap" id="fullName" required placeholder="Ahmad bin Abdullah" data-placeholder-id="Ahmad bin Abdullah" data-placeholder-en="Full name" data-placeholder-ja="氏名"></div>
+        </div>
+        
+        <!-- EMAIL with lock and static send OTP button (anti-jump: fixed width buttons) -->
+        <div class="field">
+          <label>Email</label>
+          <div class="email-lock-row">
+            <div class="input-wrapper"><i class="fas fa-envelope"></i><input type="email" name="email" id="emailInput" required placeholder="email@example.com" autocomplete="off"></div>
+            <button type="button" id="sendOtpStaticBtn" class="send-otp-btn"><i class="fas fa-paper-plane"></i> <span data-id="Kirim OTP" data-en="Send OTP" data-ja="OTP送信">Kirim OTP</span></button>
+            <button type="button" id="changeEmailBtn" class="change-email-btn" style="display: none;"><i class="fas fa-pen"></i> <span data-id="Ubah" data-en="Change" data-ja="変更">Ubah</span></button>
+          </div>
+          <div id="emailInlineError" class="error-message" style="display: none;"></div>
+        </div>
+        
+        <!-- OTP 4 digit boxes -->
+        <div id="otpSection" style="display: none;">
+          <div class="field">
+            <label data-id="Kode Verifikasi (OTP)" data-en="Verification Code" data-ja="認証コード"></label>
+            <div class="otp-boxes" id="otpContainer">
+              <input type="text" maxlength="1" class="otp-digit" data-idx="0" inputmode="numeric" pattern="\d*">
+              <input type="text" maxlength="1" class="otp-digit" data-idx="1" inputmode="numeric" pattern="\d*">
+              <input type="text" maxlength="1" class="otp-digit" data-idx="2" inputmode="numeric" pattern="\d*">
+              <input type="text" maxlength="1" class="otp-digit" data-idx="3" inputmode="numeric" pattern="\d*">
+            </div>
+            <div id="otpFeedback" class="error-message" style="display: none;"></div>
+            <div class="hint"><i class="far fa-clock"></i> <span id="resendTimerText"></span> <button type="button" id="resendOtpBtn" class="send-otp-btn" style="padding: 4px 12px; height: auto; margin-left: 8px; min-width: auto;" disabled><span data-id="Kirim ulang" data-en="Resend" data-ja="再送信">Kirim ulang</span></button></div>
+          </div>
+        </div>
+        
+        <div class="field">
+          <label data-id="Nomor HP" data-en="Phone Number" data-ja="電話番号"></label>
+          <div class="input-wrapper"><i class="fas fa-phone"></i><input type="tel" name="no_hp" id="phoneInput" placeholder="08012345678 / 081234567890" data-placeholder-id="08012345678 / 081234567890" data-placeholder-en="08012345678 / 081234567890" data-placeholder-ja="08012345678 / 081234567890" autocomplete="off"></div>
+          <div id="phoneError" class="error-message" style="display: none;"></div>
+        </div>
+        
+        <div class="field">
+          <label data-id="Domisili" data-en="Area" data-ja="居住地"></label>
+          <div class="input-wrapper"><i class="fas fa-map-marker-alt"></i><input name="domisili" list="neighborhoods" placeholder="Cari kelurahan / kota" id="domisiliInput" data-placeholder-id="Cari kelurahan / kota" data-placeholder-en="Search neighborhood/city" data-placeholder-ja="地区/都市を検索"></div>
+          <datalist id="neighborhoods">${['Okayama-shi, Kita-ku, Kaminakano','Okayama-shi, Kita-ku, Ima','Okayama-shi, Kita-ku, Omoto','Kurashiki-shi, Achi','Kurashiki-shi, Nakasho','Tamano-shi, Chikko','Soja-shi, Chuo','Akaiwa-shi, Sanyo'].map(v=>`<option value="${v}">`).join('')}</datalist>
+        </div>
+        <div class="field"><label data-id="Usia" data-en="Age" data-ja="年齢"></label><div class="input-wrapper"><i class="fas fa-id-card"></i><input type="number" name="usia" id="ageInput" placeholder="25" data-placeholder-id="25" data-placeholder-en="25" data-placeholder-ja="25"></div></div>
+      </div>
+
+      <!-- peserta breakdown -->
+      <div class="form-section">
+        <div class="section-title"><i class="fas fa-users"></i><span data-id="Rincian Peserta" data-en="Participants" data-ja="参加者詳細"></span></div>
+        <div class="breakdown-row">
+          <div class="field"><label data-id="Laki-laki Dewasa" data-en="Adult Males" data-ja="成人男性"></label><div class="input-wrapper"><i class="fas fa-mars"></i><input type="number" name="male_adults" id="maleAdults" min="0" value="0" step="1"></div></div>
+          <div class="field"><label data-id="Perempuan Dewasa" data-en="Adult Females" data-ja="成人女性"></label><div class="input-wrapper"><i class="fas fa-venus"></i><input type="number" name="female_adults" id="femaleAdults" min="0" value="0" step="1"></div></div>
+        </div>
+        <div class="field"><label data-id="Anak-anak (<15 thn)" data-en="Children (<15)" data-ja="子ども"></label><div class="input-wrapper"><i class="fas fa-child"></i><input type="number" name="children_count" id="childrenCount" min="0" value="0" step="1"></div></div>
+        
+        <div class="total-summary">
+          <div class="total-label">
+            <i class="fas fa-users"></i>
+            <span data-id="Total Peserta" data-en="Total Participants" data-ja="参加者合計">Total Peserta</span>
+          </div>
+          <div class="total-number" id="totalNumberDisplay">0</div>
+          <div class="total-detail" id="totalDetailDisplay"></div>
+        </div>
+        <input type="hidden" name="jumlah_orang" id="totalHidden">
+      </div>
+
+      <!-- Logistik & Sesi Sholat -->
+      <div class="form-section">
+        <div class="section-title"><i class="fas fa-clock"></i><span data-id="Sesi Sholat" data-en="Prayer Session" data-ja="礼拝セッション">Sesi Sholat</span></div>
+        <div class="field">
+          <label data-id="Pilih Kloter" data-en="Select Session" data-ja="セッション選択"></label>
+          <div class="input-wrapper"><i class="fas fa-calendar-alt"></i>
+            <select name="sholat_session" id="sessionSelect" required>
+              <option value="" disabled selected data-id="Pilih sesi" data-en="Select session" data-ja="セッションを選択">Pilih sesi</option>
+              <option value="Kloter 1 (07:00)" data-id="Kloter 1: 07:00" data-en="Session 1: 07:00 AM" data-ja="第1部: 07:00">Kloter 1: 07:00</option>
+              <option value="Kloter 2 (08:30)" data-id="Kloter 2: 08:30" data-en="Session 2: 08:30 AM" data-ja="第2部: 08:30">Kloter 2: 08:30</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label data-id="Transportasi" data-en="Transportation" data-ja="交通手段"></label>
+          <div class="input-wrapper"><i class="fas fa-car"></i>
+            <select name="transportasi" id="transportSelect" required>
+              <option value="" disabled selected data-id="Pilih transportasi" data-en="Select transportation" data-ja="交通手段を選択">Pilih transportasi</option>
+              <option value="Jalan Kaki" data-id="Jalan Kaki" data-en="Walking" data-ja="徒歩">Jalan Kaki</option>
+              <option value="Sepeda" data-id="Sepeda" data-en="Bicycle" data-ja="自転車">Sepeda</option>
+              <option value="Mobil" data-id="Mobil" data-en="Car" data-ja="車">Mobil</option>
+              <option value="Transportasi Umum" data-id="Transportasi Umum" data-en="Public Transport" data-ja="公共交通機関">Transportasi Umum</option>
+            </select>
+          </div>
+        </div>
+        <div id="parkingWarning" class="parking-warning" style="display: none;">
+          <i class="fas fa-car-side"></i>
+          <span id="parkingMsg" data-id="⚠️ Masjid tidak memiliki lahan parkir. Silakan gunakan parkir berbayar di sekitar area masjid." data-en="⚠️ The mosque has no parking area. Please use paid parking nearby." data-ja="⚠️ モスクに駐車場はありません。近隣の有料駐車場をご利用ください。">⚠️ Masjid tidak memiliki lahan parkir. Silakan gunakan parkir berbayar di sekitar area masjid.</span>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="section-title"><i class="fas fa-venus-mars"></i><span data-id="Jenis Kelamin" data-en="Gender" data-ja="性別"></span></div>
+        <div class="gender-group">
+          <input type="radio" id="genderMale" name="jk" value="Laki-laki"><label for="genderMale"><i class="fas fa-mars"></i> <span data-id="Laki-laki" data-en="Male" data-ja="男性">Laki-laki</span></label>
+          <input type="radio" id="genderFemale" name="jk" value="Perempuan"><label for="genderFemale"><i class="fas fa-venus"></i> <span data-id="Perempuan" data-en="Female" data-ja="女性">Perempuan</span></label>
+        </div>
+      </div>
+
+      <div class="field"><label class="consent"><input type="checkbox" id="consentCheck" required> <span data-id="Saya menyetujui data digunakan untuk keperluan acara ini" data-en="I agree to data usage" data-ja="同意します"></span></label></div>
+      
+      <div id="duplicateWarning" class="warning-badge" style="display: none;"><i class="fas fa-exclamation-triangle"></i><span id="dupMsg"></span></div>
+      <div id="generalWarning" class="warning-badge" style="display: none; background:#fef9e3;"></div>
+
+      <div class="sticky-submit">
+        <button type="submit" id="submitBtn"><span id="submitText" data-id="Daftar Sekarang" data-en="Register Now" data-ja="今すぐ登録">Daftar Sekarang</span> <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </form>
+  </div>
+</div>
+<footer>© 2026 — Masjid Central Okayama</footer>
+</main>
+
+<script>
+// ---------- FULLY MULTILINGUAL (including resend OTP & timers) ----------
+const translations = {
+  id: {
+    totalPreview: (total) => `📊 Total peserta: ${total} orang`,
+    resendTimerWait: (sec) => `Kirim ulang dalam ${sec}s`,
+    resendTimerReady: "Kode baru bisa dikirim",
+    otpVerified: "✅ Email terverifikasi",
+    otpWrong: "❌ Kode salah, coba lagi",
+    phoneError: "Format HP: Jepang (080/090/070) atau Indonesia (08xx)",
+    duplicateWarning: "⚠️ Data dengan email/HP ini sudah terdaftar. Hubungi panitia jika perlu perubahan.",
+    toastFillNameEmail: "Isi nama & email terlebih dahulu",
+    toastInvalidEmail: "Email tidak valid",
+    toastOtpSent: "Kode OTP dikirim ke email",
+    toastOtpFail: "Gagal kirim OTP",
+    toastConnectionFail: "Koneksi gagal, coba lagi",
+    toastEmailLocked: "Email terkunci, klik ubah untuk mengganti",
+    toastWaitResend: (sec) => `Tunggu ${sec} detik`,
+    toastConsent: "Setujui persyaratan",
+    toastMinParticipant: "Minimal 1 peserta",
+    toastOtpNotVerified: "Verifikasi OTP belum selesai",
+    toastDuplicate: "Data duplikat, tidak bisa daftar",
+    toastInvalidPhone: "Nomor HP tidak valid",
+    toastSelectSession: "Pilih sesi sholat",
+    toastSelectTransport: "Pilih transportasi",
+    toastRegisterFail: "Registrasi gagal",
+    submitProcessing: "Memproses..."
+  },
+  en: {
+    totalPreview: (total) => `📊 Total participants: ${total} person(s)`,
+    resendTimerWait: (sec) => `Resend in ${sec}s`,
+    resendTimerReady: "New code can be sent",
+    otpVerified: "✅ Email verified",
+    otpWrong: "❌ Wrong code, try again",
+    phoneError: "Phone format: JP (080/090/070) or Indonesia (08xx)",
+    duplicateWarning: "⚠️ Data with this email/phone already registered. Please contact the committee if you need to make changes.",
+    toastFillNameEmail: "Fill in name and email first",
+    toastInvalidEmail: "Invalid email",
+    toastOtpSent: "OTP code sent to email",
+    toastOtpFail: "Failed to send OTP",
+    toastConnectionFail: "Connection failed, try again",
+    toastEmailLocked: "Email locked, click change to modify",
+    toastWaitResend: (sec) => `Wait ${sec} seconds`,
+    toastConsent: "Please agree to the terms",
+    toastMinParticipant: "At least 1 participant",
+    toastOtpNotVerified: "OTP verification not completed",
+    toastDuplicate: "Duplicate data, cannot register",
+    toastInvalidPhone: "Invalid phone number",
+    toastSelectSession: "Select prayer session",
+    toastSelectTransport: "Select transportation",
+    toastRegisterFail: "Registration failed",
+    submitProcessing: "Processing..."
+  },
+  ja: {
+    totalPreview: (total) => `📊 参加者合計: ${total} 人`,
+    resendTimerWait: (sec) => `再送信まで ${sec}秒`,
+    resendTimerReady: "新しいコードを送信できます",
+    otpVerified: "✅ メール認証完了",
+    otpWrong: "❌ コードが間違っています",
+    phoneError: "電話番号形式: 日本 (080/090/070) またはインドネシア (08xx)",
+    duplicateWarning: "⚠️ このメール/電話番号は既に登録されています。変更が必要な場合は委員会にお問い合わせください。",
+    toastFillNameEmail: "名前とメールアドレスを入力してください",
+    toastInvalidEmail: "無効なメールアドレス",
+    toastOtpSent: "OTPコードをメールに送信しました",
+    toastOtpFail: "OTP送信に失敗しました",
+    toastConnectionFail: "接続エラー、再試行してください",
+    toastEmailLocked: "メールはロックされています。変更するには「変更」をクリック",
+    toastWaitResend: (sec) => `${sec}秒お待ちください`,
+    toastConsent: "利用規約に同意してください",
+    toastMinParticipant: "少なくとも1名の参加者が必要です",
+    toastOtpNotVerified: "OTP認証が完了していません",
+    toastDuplicate: "重複データのため登録できません",
+    toastInvalidPhone: "無効な電話番号",
+    toastSelectSession: "礼拝セッションを選択してください",
+    toastSelectTransport: "交通手段を選択してください",
+    toastRegisterFail: "登録に失敗しました",
+    submitProcessing: "処理中..."
+  }
+};
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwt85UaPcPFCLCmNrgrI8ZYxqXARtftDpdj3JNAS5nCh7jnlkS26jv3C5WXhwioAIrpEA/exec";
+let currentLang = localStorage.getItem('preferredLang') || (navigator.language.startsWith('ja') ? 'ja' : (navigator.language.startsWith('en') ? 'en' : 'id'));
+
+let state = {
+  isVerified: false,
+  otpToken: "",
+  emailLocked: false,
+  lockedEmailValue: "",
+  countdown: 0,
+  countdownInterval: null,
+  isSubmitting: false,
+  duplicateConfirmed: false,
+  lastCheckEmail: "",
+  lastCheckPhone: ""
+};
+
+// DOM elements
+const emailInput = document.getElementById('emailInput');
+const changeEmailBtn = document.getElementById('changeEmailBtn');
+const sendOtpStatic = document.getElementById('sendOtpStaticBtn');
+const resendOtpBtn = document.getElementById('resendOtpBtn');
+const otpSection = document.getElementById('otpSection');
+const otpDigits = document.querySelectorAll('.otp-digit');
+const otpFeedback = document.getElementById('otpFeedback');
+const resendTimerSpan = document.getElementById('resendTimerText');
+const phoneInput = document.getElementById('phoneInput');
+const phoneErrorDiv = document.getElementById('phoneError');
+const fullNameInput = document.getElementById('fullName');
+const maleAdults = document.getElementById('maleAdults');
+const femaleAdults = document.getElementById('femaleAdults');
+const childrenCount = document.getElementById('childrenCount');
+const totalHidden = document.getElementById('totalHidden');
+const totalNumberDisplay = document.getElementById('totalNumberDisplay');
+const totalDetailDisplay = document.getElementById('totalDetailDisplay');
+const duplicateWarning = document.getElementById('duplicateWarning');
+const dupMsgSpan = document.getElementById('dupMsg');
+const submitBtn = document.getElementById('submitBtn');
+const loadingOverlay = document.getElementById('loadingOverlay');
+const sessionSelect = document.getElementById('sessionSelect');
+const transportSelect = document.getElementById('transportSelect');
+const parkingWarningDiv = document.getElementById('parkingWarning');
+
+function showToast(key, ...args) {
+  let msg = translations[currentLang][key];
+  if (typeof msg === 'function') msg = msg(...args);
+  const toastDiv = document.getElementById('toastRoot');
+  document.getElementById('toastMsg').innerText = msg;
+  toastDiv.classList.add('show');
+  setTimeout(() => toastDiv.classList.remove('show'), 2800);
+}
+
+const showLoading = () => loadingOverlay.classList.add('active');
+const hideLoading = () => loadingOverlay.classList.remove('active');
+function debounce(fn, delay) { let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), delay); }; }
+
+function validatePhone(phone) {
+  const cleaned = phone.replace(/\D/g, '');
+  const jpRegex = /^(0[789]0\d{8})$/;
+  const idRegex = /^08[0-9]{8,11}$/;
+  const withCountry = /^\+81[789]0\d{8}$/.test(phone.replace(/\s/g, '')) || /^\+62[0-9]{9,12}$/.test(phone.replace(/\s/g, ''));
+  return jpRegex.test(cleaned) || idRegex.test(cleaned) || withCountry;
+}
+
+function updatePhoneValidation() {
+  const val = phoneInput.value.trim();
+  if (!val) { phoneErrorDiv.style.display = 'none'; return false; }
+  if (!validatePhone(val)) {
+    phoneErrorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${translations[currentLang].phoneError}`;
+    phoneErrorDiv.style.display = 'flex';
+    return false;
+  } else {
+    phoneErrorDiv.style.display = 'none';
+    return true;
+  }
+}
+
+function updateTotal() {
+  let male = parseInt(maleAdults.value) || 0;
+  let female = parseInt(femaleAdults.value) || 0;
+  let child = parseInt(childrenCount.value) || 0;
+  let total = male + female + child;
+  totalHidden.value = total;
+  totalNumberDisplay.textContent = total;
+  const adultsTotal = male + female;
+  if (currentLang === 'id') totalDetailDisplay.textContent = `${adultsTotal} dewasa, ${child} anak`;
+  else if (currentLang === 'en') totalDetailDisplay.textContent = `${adultsTotal} adult${adultsTotal !== 1 ? 's' : ''}, ${child} child${child !== 1 ? 'ren' : ''}`;
+  else totalDetailDisplay.textContent = `大人 ${adultsTotal} 名, 子供 ${child} 名`;
+  return total;
+}
+
+function setupOtpBoxes() {
+  const boxes = document.querySelectorAll('.otp-digit');
+  boxes.forEach((box, idx) => {
+    box.addEventListener('input', (e) => {
+      let val = e.target.value.replace(/\D/g, '');
+      if (val.length > 1) val = val[0];
+      box.value = val;
+      if (val && idx < 3) boxes[idx+1].focus();
+      const fullCode = Array.from(boxes).map(b => b.value).join('');
+      if (fullCode.length === 4) verifyOTP(fullCode);
+    });
+    box.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace' && !box.value && idx > 0) boxes[idx-1].focus();
+    });
+    box.addEventListener('paste', (e) => {
+      e.preventDefault();
+      const paste = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0,4);
+      paste.split('').forEach((ch, i) => { if(boxes[i]) boxes[i].value = ch; });
+      if(paste.length===4) verifyOTP(paste);
+    });
+  });
+}
+setupOtpBoxes();
+
+async function sendOTP(isResend = false) {
+  const email = emailInput.value.trim();
+  const nama = fullNameInput.value.trim();
+  if (!email || !nama) { showToast('toastFillNameEmail'); return false; }
+  if (!email.includes('@')) { showToast('toastInvalidEmail'); return false; }
+  showLoading();
+  try {
+    const url = `${SCRIPT_URL}?action=send_otp&email=${encodeURIComponent(email)}&nama=${encodeURIComponent(nama)}`;
+    const res = await fetch(url);
+    const json = await res.json();
+    if (json.status === 'success') {
+      state.otpToken = json.token || "";
+      state.isVerified = false;
+      state.emailLocked = true;
+      state.lockedEmailValue = email;
+      emailInput.disabled = true;
+      changeEmailBtn.style.display = 'inline-flex';
+      sendOtpStatic.style.display = 'none';
+      otpSection.style.display = 'block';
+      document.querySelectorAll('.otp-digit').forEach(inp => inp.value = '');
+      otpFeedback.style.display = 'none';
+      startResendCountdown(60);
+      showToast('toastOtpSent');
+      return true;
+    } else { showToast('toastOtpFail'); return false; }
+  } catch (err) { showToast('toastConnectionFail'); return false; } finally { hideLoading(); }
+}
+
+function startResendCountdown(seconds) {
+  if(state.countdownInterval) clearInterval(state.countdownInterval);
+  state.countdown = seconds;
+  const updateTimer = () => {
+    if(state.countdown <= 0){
+      resendOtpBtn.disabled = false;
+      resendTimerSpan.innerText = translations[currentLang].resendTimerReady;
+      clearInterval(state.countdownInterval);
+      state.countdownInterval = null;
+    } else {
+      resendOtpBtn.disabled = true;
+      resendTimerSpan.innerText = translations[currentLang].resendTimerWait(state.countdown);
+      state.countdown--;
+    }
+  };
+  updateTimer();
+  state.countdownInterval = setInterval(updateTimer, 1000);
+}
+
+resendOtpBtn.addEventListener('click', async () => { if(state.countdown===0 && state.emailLocked){ await sendOTP(true); startResendCountdown(60); } else showToast('toastWaitResend', state.countdown); });
+
+async function verifyOTP(code) {
+  if(!state.otpToken || code.length !== 4) return;
+  showLoading();
+  try {
+    const url = `${SCRIPT_URL}?action=verify_otp&token=${encodeURIComponent(state.otpToken)}&code=${encodeURIComponent(code)}&email=${encodeURIComponent(state.lockedEmailValue)}`;
+    const res = await fetch(url);
+    const json = await res.json();
+    if(json.status === 'success'){
+      state.isVerified = true;
+      otpFeedback.innerHTML = `<i class="fas fa-check-circle"></i> ${translations[currentLang].otpVerified}`;
+      otpFeedback.style.color = "#15803d";
+      otpFeedback.style.display = "flex";
+      document.querySelectorAll('.otp-digit').forEach(inp => inp.disabled = true);
+      document.getElementById('otpContainer').classList.add('otp-verified-highlight');
+      resendOtpBtn.disabled = true;
+      if(state.countdownInterval) clearInterval(state.countdownInterval);
+    } else {
+      state.isVerified = false;
+      otpFeedback.innerHTML = `<i class="fas fa-times-circle"></i> ${translations[currentLang].otpWrong}`;
+      otpFeedback.style.color = "#dc2626";
+      otpFeedback.style.display = "flex";
+      document.querySelector('.otp-boxes').classList.add('shake');
+      setTimeout(() => document.querySelector('.otp-boxes').classList.remove('shake'), 400);
+    }
+    updateSubmitButton();
+  } catch(e) { showToast('toastConnectionFail'); } finally { hideLoading(); }
+}
+
+function resetEmailLock() {
+  if(state.emailLocked){
+    emailInput.disabled = false;
+    state.emailLocked = false;
+    state.isVerified = false;
+    state.otpToken = "";
+    otpSection.style.display = "none";
+    changeEmailBtn.style.display = "none";
+    sendOtpStatic.style.display = 'inline-flex';
+    document.querySelectorAll('.otp-digit').forEach(inp => { inp.value = ''; inp.disabled = false; });
+    if(state.countdownInterval) clearInterval(state.countdownInterval);
+    state.countdown = 0;
+    resendOtpBtn.disabled = true;
+    showToast('toastEmailLocked');
+    updateSubmitButton();
+  }
+}
+changeEmailBtn.addEventListener('click', resetEmailLock);
+sendOtpStatic.addEventListener('click', async () => { if(state.emailLocked) { showToast('toastEmailLocked'); return; } await sendOTP(false); });
+
+async function checkDuplicate() {
+  const email = emailInput.value.trim();
+  const phone = phoneInput.value.trim();
+  if(!email || !phone) return;
+  if(!email.includes('@') || !validatePhone(phone)) return;
+  if(state.lastCheckEmail === email && state.lastCheckPhone === phone) return;
+  state.lastCheckEmail = email; state.lastCheckPhone = phone;
+  try {
+    const url = `${SCRIPT_URL}?action=check_duplicate&email=${encodeURIComponent(email)}&no_hp=${encodeURIComponent(phone)}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if(data.isDuplicate){
+      duplicateWarning.style.display = "flex";
+      dupMsgSpan.innerText = translations[currentLang].duplicateWarning;
+      state.duplicateConfirmed = false;
+    } else {
+      duplicateWarning.style.display = "none";
+      state.duplicateConfirmed = true;
+    }
+    updateSubmitButton();
+  } catch(e){}
+}
+const checkDuplicateDebounced = debounce(checkDuplicate, 700);
+emailInput.addEventListener('input', () => { if(!state.emailLocked) checkDuplicateDebounced(); });
+phoneInput.addEventListener('input', () => { updatePhoneValidation(); checkDuplicateDebounced(); });
+
+function handleTransportWarning() { parkingWarningDiv.style.display = transportSelect.value === 'Mobil' ? 'flex' : 'none'; }
+transportSelect.addEventListener('change', handleTransportWarning);
+
+function saveToLocal() { localStorage.setItem('eid_form_draft', JSON.stringify({ nama: fullNameInput.value, email: emailInput.value, phone: phoneInput.value, domisili: document.querySelector('[name="domisili"]').value, usia: document.getElementById('ageInput').value, male: maleAdults.value, female: femaleAdults.value, children: childrenCount.value, gender: document.querySelector('input[name="jk"]:checked')?.value || '', session: sessionSelect.value, transport: transportSelect.value })); }
+function restoreFromLocal() {
+  const raw = localStorage.getItem('eid_form_draft');
+  if(raw) try { const d = JSON.parse(raw); fullNameInput.value = d.nama || ''; emailInput.value = d.email || ''; phoneInput.value = d.phone || ''; document.querySelector('[name="domisili"]').value = d.domisili || ''; document.getElementById('ageInput').value = d.usia || ''; maleAdults.value = d.male || 0; femaleAdults.value = d.female || 0; childrenCount.value = d.children || 0; if(d.gender === 'Laki-laki') document.getElementById('genderMale').checked = true; else if(d.gender === 'Perempuan') document.getElementById('genderFemale').checked = true; if(d.session) sessionSelect.value = d.session; if(d.transport) { transportSelect.value = d.transport; handleTransportWarning(); } updateTotal(); } catch(e){}
+}
+setInterval(() => { if(!state.isSubmitting) saveToLocal(); }, 2000);
+restoreFromLocal();
+
+function generateUUID() { return crypto.randomUUID ? crypto.randomUUID().slice(0,8) : Math.random().toString(36).substring(2,10); }
+
+document.getElementById('registrationForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if(state.isSubmitting) return;
+  if(!document.getElementById('consentCheck').checked){ showToast('toastConsent'); return; }
+  if(updateTotal() === 0){ showToast('toastMinParticipant'); return; }
+  if(!state.isVerified){ showToast('toastOtpNotVerified'); return; }
+  if(duplicateWarning.style.display !== 'none' && state.duplicateConfirmed===false){ showToast('toastDuplicate'); return; }
+  if(!validatePhone(phoneInput.value.trim())){ showToast('toastInvalidPhone'); return; }
+  if(!sessionSelect.value) { showToast('toastSelectSession'); return; }
+  if(!transportSelect.value) { showToast('toastSelectTransport'); return; }
+  state.isSubmitting = true; submitBtn.disabled = true;
+  const originalHTML = submitBtn.innerHTML;
+  submitBtn.innerHTML = `<span class="loading-spinner"></span> ${translations[currentLang].submitProcessing}`; showLoading();
+  const fd = new FormData(document.getElementById('registrationForm'));
+  fd.append('action', 'register'); fd.append('id', `EID-${generateUUID()}`); fd.append('otp_token', state.otpToken); fd.set('jumlah_orang', updateTotal().toString());
+  try {
+    const res = await fetch(SCRIPT_URL, { method: 'POST', body: fd });
+    const json = await res.json();
+    if(json.status === 'success') { localStorage.removeItem('eid_form_draft'); window.location.href = "success.html?" + new URLSearchParams(fd).toString(); }
+    else { showToast('toastRegisterFail'); submitBtn.disabled = false; submitBtn.innerHTML = originalHTML; }
+  } catch(err) { showToast('toastConnectionFail'); submitBtn.disabled = false; submitBtn.innerHTML = originalHTML; } 
+  finally { state.isSubmitting = false; hideLoading(); }
+});
+
+function updateSubmitButton() {
+  const totalOk = updateTotal() > 0;
+  const verifiedOk = state.isVerified;
+  const duplicateBlock = duplicateWarning.style.display === 'flex' && !state.duplicateConfirmed;
+  const sessionOk = sessionSelect.value && sessionSelect.value !== "";
+  const transportOk = transportSelect.value && transportSelect.value !== "";
+  submitBtn.disabled = !(totalOk && verifiedOk && !duplicateBlock && sessionOk && transportOk);
+}
+[maleAdults, femaleAdults, childrenCount].forEach(el=> el.addEventListener('input', updateSubmitButton));
+sessionSelect.addEventListener('change', updateSubmitButton);
+transportSelect.addEventListener('change', updateSubmitButton);
+document.getElementById('consentCheck').addEventListener('change', updateSubmitButton);
+updateTotal(); updateSubmitButton();
+phoneInput.addEventListener('input', updatePhoneValidation);
+
+// apply language: full multilingual sync (including resend timer & OTP feedback)
+function applyLanguage(lang) {
+  currentLang = lang;
+  document.querySelectorAll('[data-id]').forEach(el => { if(el.dataset[lang]) el.textContent = el.dataset[lang]; });
+  document.querySelectorAll('option[data-id]').forEach(opt => { if(opt.dataset[lang]) opt.textContent = opt.dataset[lang]; });
+  document.querySelectorAll('[data-placeholder-id]').forEach(el => { const key = `placeholder${lang.charAt(0).toUpperCase() + lang.slice(1)}`; if (el.dataset[key]) el.placeholder = el.dataset[key]; });
+  const parkingSpan = document.getElementById('parkingMsg'); if(parkingSpan && parkingSpan.dataset[lang]) parkingSpan.textContent = parkingSpan.dataset[lang];
+  document.querySelectorAll('.gender-group label span').forEach(span => { if(span.dataset[lang]) span.textContent = span.dataset[lang]; });
+  updateTotal();
+  if (otpFeedback.style.display === 'flex') {
+    if (state.isVerified) otpFeedback.innerHTML = `<i class="fas fa-check-circle"></i> ${translations[currentLang].otpVerified}`;
+    else if (!state.isVerified && otpFeedback.style.display === 'flex') otpFeedback.innerHTML = `<i class="fas fa-times-circle"></i> ${translations[currentLang].otpWrong}`;
+  }
+  if (state.countdownInterval) {
+    if (state.countdown > 0) resendTimerSpan.innerText = translations[currentLang].resendTimerWait(state.countdown);
+    else resendTimerSpan.innerText = translations[currentLang].resendTimerReady;
+  }
+  if (duplicateWarning.style.display === 'flex') dupMsgSpan.innerText = translations[currentLang].duplicateWarning;
+  if (phoneErrorDiv.style.display === 'flex') updatePhoneValidation();
+  if (submitTextSpan && submitTextSpan.dataset[lang]) submitTextSpan.textContent = submitTextSpan.dataset[lang];
+  document.querySelectorAll('#sendOtpStaticBtn span, #changeEmailBtn span, #resendOtpBtn span').forEach(span => { if(span.dataset[lang]) span.textContent = span.dataset[lang]; });
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add('active');
+  localStorage.setItem('preferredLang', lang);
+}
+const submitTextSpan = document.getElementById('submitText');
+document.querySelectorAll('.lang-btn').forEach(btn => btn.addEventListener('click', () => applyLanguage(btn.dataset.lang)));
+applyLanguage(currentLang);
+</script>
+</body>
+</html>
