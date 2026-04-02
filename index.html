@@ -671,7 +671,7 @@
     function applyTranslations() { document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); }); document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); }); document.getElementById('submitHelperText').textContent = t('helperTextDefault'); }
 
     /* ===== API ===== */
-    const API_BASE = "https://script.google.com/macros/s/AKfycbxBc5TC19IqZpNWUtffHxFc72YoIfO4s1vHQS9i7u6jlumAVWP5DCg4KPCgKWso-5f6fA/exec";
+    const API_BASE = "https://script.google.com/macros/s/AKfycbx2ki0HaZMmvndauXItMWy83hb-Z-tbRWE5oYvRs9HP15_0iFywoMjMHmtpLYd4P5T7MA/exec";
     async function safeFetch(url, options = {}) {
       try {
         const controller = new AbortController();
